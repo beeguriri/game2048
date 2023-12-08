@@ -7,8 +7,11 @@ const Routers = () => {
     <BrowserRouter>
       <Routes>
         <Route path={ROOT} element={<MainContainer />}>
+          {/* 
+          라우팅이 필요할 때 작성
           <Route></Route>
           <Route></Route>
+          */}
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 
 const Header = styled.header`
-  background-color: var(--chakra-colors-white);
+  background-color: var(--chakra-colors-blue);
   position: sticky;
   top: 0;
   z-index: 1;
-  height: 50px;
+  height: 100px;
   display: flex;
   justify-content: flex-start;
   padding: 0 1rem;

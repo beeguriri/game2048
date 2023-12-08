@@ -1,18 +1,16 @@
-import {
-  LayoutContainer,
-  LayoutFooter,
-  LayoutHeader,
-  LayoutMainContent,
-  LayoutSidebar,
-} from './style';
+import FooterContainer from '@containers/Footer';
+import HeaderContainer from '@containers/Header';
+import MainContents from '@containers/Main';
+import { LayoutContainer, MainWrapper } from './style';
 
 const MainContainer = () => {
   return (
     <LayoutContainer>
-      <LayoutHeader>header</LayoutHeader>
-      <LayoutSidebar>sidebar</LayoutSidebar>
-      <LayoutMainContent>main contents</LayoutMainContent>
-      <LayoutFooter>footer</LayoutFooter>
+      <MainWrapper>
+        <HeaderContainer />
+        <MainContents />
+        <FooterContainer />
+      </MainWrapper>
     </LayoutContainer>
   );
 };
