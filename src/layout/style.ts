@@ -13,13 +13,4 @@ const MainWrapper = styled.div`
   position: relative;
 `;
 
-const Main = styled.main`
-  width: 100%;
-  height: calc(100% - 50px - 35px);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
-`;
-
-export { LayoutContainer, MainWrapper, Main };
+export { LayoutContainer, MainWrapper };
