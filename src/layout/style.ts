@@ -10,7 +10,6 @@ const LayoutContainer = styled.main`
 const MainWrapper = styled.div`
   height: 100%;
   width: 100%;
-  background-color: #f1f2f7;
   position: relative;
 `;
 

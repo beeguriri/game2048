@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 const Header = styled.header`
-  background-color: var(--chakra-colors-blue);
+  background-color: #e9d8fd;
   position: sticky;
   top: 0;
   z-index: 1;

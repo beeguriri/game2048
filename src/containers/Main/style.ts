@@ -7,7 +7,7 @@ const StyledMain = styled.main`
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
-  border: solid red;
+  background-color: #faf5ff;
 `;
 
 export { StyledMain };
