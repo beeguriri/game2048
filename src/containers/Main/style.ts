@@ -10,4 +10,9 @@ const StyledMain = styled.main`
   background-color: #faf5ff;
 `;
 
-export { StyledMain };
+const Title = styled.p`
+font-weight: bold;
+font-size : 1rem;
+`;
+
+export { StyledMain, Title };
