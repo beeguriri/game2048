@@ -1,46 +1,31 @@
+import times from 'lodash/times';
+import { MAX_POS } from '@assets/constant';
+import { GameContainer, GridCell, GridContainer, GridRow } from './style';
+import { useState } from 'react';
+
+
 const Game = () => {
+    const [tileList, setTileList] = useState([]);
     return (
       <>
-        <div className='game-container'>
-            <div className='grid-container'>
-                <div className='grid-row'>
-                    <div className='grid-cell'></div>
-                    <div className='grid-cell'></div>
-                    <div className='grid-cell'></div>
-                    <div className='grid-cell'></div>
-                </div>
-                <div className='grid-row'>
-                    <div className='grid-cell'></div>
-                    <div className='grid-cell'></div>
-                    <div className='grid-cell'></div>
-                    <div className='grid-cell'></div>
-                </div>
-                <div className='grid-row'>
-                    <div className='grid-cell'></div>
-                    <div className='grid-cell'></div>
-                    <div className='grid-cell'></div>
-                    <div className='grid-cell'></div>
-                </div>
-                <div className='grid-row'>
-                    <div className='grid-cell'></div>
-                    <div className='grid-cell'></div>
-                    <div className='grid-cell'></div>
-                    <div className='grid-cell'></div>
-                </div>
-            </div>
-
-            <div className='tile-container'>
-                <div className='tile tile-4 tile-position-1-1'>
-                    <div className='tile-inner'>4</div>
-                </div>
-                <div className='tile tile-4 tile-position-1-4 tile-new'>
-                    <div className='tile-inner'>4</div>
-                </div>
-                <div className='tile tile-4 tile-position-2-1'>
-                    <div className='tile-inner'>2</div>
-                </div>
-            </div>
-        </div>
+        <GameContainer>
+          <GridContainer>
+            {times(MAX_POS, () => (
+              <GridRow>
+                {times(MAX_POS, () => (
+                  <GridCell />
+                ))}
+              </GridRow>
+            ))}
+          </GridContainer>
+          <div className='tile-container'>
+            {/* {tileList.map(item => {
+              <div className={`tile tile-${item.value} tile-position-${item.x}-${item.y}`}>
+                <div className='tile-inner'>{item.value}</div>
+              </div>
+            })} */}
+          </div>
+        </GameContainer>
       </>
     )
   };
