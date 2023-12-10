@@ -1,8 +1,5 @@
-import times from 'lodash/times';
-import { MAX_POS } from '@assets/constant';
-import { GameContainer, GridCell, GridContainer, GridRow, InnerText } from './style';
+import { GameContainer, GridCell, GridContainer, InnerText } from './style';
 import { useState } from 'react';
-import { Box } from '@chakra-ui/react';
 
 type Item = {
   xPos: number;

@@ -29,10 +29,6 @@ const GridContainer = styled.div`
   gap: 0.5rem;
 `
 
-const GridRow = styled.div`
-  margin-bottom: 15px;
-`
-
 const GridCell = styled.div<{$xPos?: number; $yPos?: number;}>`
   width: 100px;
   height: 100px;
@@ -70,4 +66,4 @@ const selectColor = (color: number) => {
 
 }
 
-export { StyledMain, Title, GameContainer, GridContainer, GridRow, GridCell, InnerText };
+export { StyledMain, Title, GameContainer, GridContainer, GridCell, InnerText };
