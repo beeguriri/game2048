@@ -3,6 +3,7 @@ import { GameContainer, GridCell, GridContainer, InnerText } from './style';
 import { useState } from 'react';
 import { times } from 'lodash';
 import { MAX_POS } from '@assets/constant';
+import useMoveTile from '@hooks/useMoveTile';
 
 type Item = {
   xPos: number;
@@ -12,8 +13,7 @@ type Item = {
 
 const Game = () => {
     const [tileList, setTileList] = useState<Item[]>(getInitialTileList);
-    
-
+    useMoveTile();
     return (
       <>
         <GameContainer>
@@ -21,7 +21,7 @@ const Game = () => {
             {/* 카드 기본 틀 만들기 */}
             {times(MAX_POS, (y) =>
               times(MAX_POS, (x) => (
-                <GridCell $xPos={x+1} $yPos={y+1}>
+                <GridCell key={`cell-${x+1}-${y+1}`} $xPos={x+1} $yPos={y+1}>
                   <InnerText></InnerText>
                 </GridCell>
               ))
