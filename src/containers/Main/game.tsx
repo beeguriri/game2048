@@ -9,11 +9,14 @@ type Item = {
   xPos: number;
   yPos: number;
   value: number;
+  isNew: boolean,
+  isMerged: boolean,
+  isDisabled: boolean,
 };
 
 const Game = () => {
     const [tileList, setTileList] = useState<Item[]>(getInitialTileList);
-    useMoveTile();
+    useMoveTile({tileList, setTileList});
     return (
       <>
         <GameContainer>
