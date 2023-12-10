@@ -55,8 +55,17 @@ const InnerText = styled.p<{$color?: number;}>`
 
 const selectColor = (color: number) => {
   switch(color) {
-    case 2: return 'red';
-    case 4: return 'blue';
+    case 2: return '#FAF5FF';
+    case 4: return '#FAF5FF';
+    case 8: return '#E9D8FD';
+    case 16: return '#D6BCFA';
+    case 32: return '#B794F4';
+    case 64: return '#9F7AEA';
+    case 128: return '#805AD5';
+    case 256: return '#6B46C1';
+    case 512: return '#553C9A';
+    case 1024: return '#44337A';
+    case 2048: return '#322659';
   }
 
 }

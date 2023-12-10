@@ -2,44 +2,61 @@ import times from 'lodash/times';
 import { MAX_POS } from '@assets/constant';
 import { GameContainer, GridCell, GridContainer, GridRow, InnerText } from './style';
 import { useState } from 'react';
+import { Box } from '@chakra-ui/react';
 
+type Item = {
+  xPos: number;
+  yPos: number;
+  value: number;
+};
 
 const Game = () => {
-    const [tileList, setTileList] = useState([]);
+    const [tileList, setTileList] = useState<Item[]>([]);
+    tileList.push({xPos: 1, yPos: 1, value: 4})
+    tileList.push({xPos: 2, yPos: 3, value: 256})
+
     return (
       <>
         <GameContainer>
           <GridContainer>
+            {/* 카드 기본 틀 만들기 */}
             <GridCell $xPos={1} $yPos={1}>
-              <InnerText $color={2}>(1,1)</InnerText>
+              <InnerText></InnerText>
             </GridCell>
             <GridCell $xPos={1} $yPos={2}>
-              <InnerText $color={4}>(1,2)</InnerText>
+              <InnerText></InnerText>
             </GridCell>
             <GridCell $xPos={1} $yPos={3}>
-              <InnerText>(1,3)</InnerText>
+              <InnerText></InnerText>
             </GridCell>
-            <GridCell $xPos={2} $yPos={1}>(2,1)</GridCell>
-            <GridCell $xPos={2} $yPos={2}>(2,2)</GridCell>
-            <GridCell $xPos={2} $yPos={3}>(2,3)</GridCell>
-            <GridCell $xPos={3} $yPos={1}>(3,1)</GridCell>
-            <GridCell $xPos={3} $yPos={2}>(3,2)</GridCell>
-            <GridCell $xPos={3} $yPos={3}>(3,3)</GridCell>
-            {/* {times(MAX_POS, () => (
-              <GridRow>
-                {times(MAX_POS, () => (
-                  <GridCell />
-                ))}
-              </GridRow>
-            ))} */}
+            <GridCell $xPos={2} $yPos={1}>
+              <InnerText></InnerText>
+            </GridCell>
+            <GridCell $xPos={2} $yPos={2}>
+              <InnerText></InnerText>
+            </GridCell>
+            <GridCell $xPos={2} $yPos={3}>
+              <InnerText></InnerText>
+            </GridCell>
+            <GridCell $xPos={3} $yPos={1}>
+              <InnerText></InnerText>
+            </GridCell>
+            <GridCell $xPos={3} $yPos={2}>
+              <InnerText></InnerText>
+            </GridCell>
+            <GridCell $xPos={3} $yPos={3}>
+              <InnerText></InnerText>
+            </GridCell>
+
+            {/* tile List map으로 돌기 */}
+            {tileList.map(item => {
+              return (
+                <GridCell $xPos={item.xPos} $yPos={item.yPos}>
+                  <InnerText $color={item.value}>{item.value}</InnerText>
+                </GridCell>
+              )
+            })}
           </GridContainer>
-          <div className='tile-container'>
-            {/* {tileList.map(item => {
-              <div className={`tile tile-${item.value} tile-position-${item.x}-${item.y}`}>
-                <div className='tile-inner'>{item.value}</div>
-              </div>
-            })} */}
-          </div>
         </GameContainer>
       </>
     )
