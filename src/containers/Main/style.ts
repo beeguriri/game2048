@@ -16,43 +16,49 @@ font-size : 1rem;
 `;
 
 const GameContainer = styled.div`
-  margin-top: 40px;
-  position: relative;
   padding: 15px;
-  cursor: default;
-  -webkit-touch-callout: none;
-  -ms-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -ms-touch-action: none;
-  touch-action: none;
   background: #bbada0;
   border-radius: 6px;
-  width: 500px;
-  height: 500px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
 `
 
 const GridContainer = styled.div`
-  position: absolute;
-  z-index: 1;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
+  gap: 0.5rem;
 `
 
 const GridRow = styled.div`
   margin-bottom: 15px;
 `
 
-const GridCell = styled.div`
-  width: 106.25px;
-  height: 106.25px;
-  margin-right: 15px;
-  float: left;
+const GridCell = styled.div<{$xPos?: number; $yPos?: number;}>`
+  width: 100px;
+  height: 100px;
+  grid-row-start: ${props => props.$xPos ? props.$xPos : undefined };
+  grid-column-start: ${props => props.$yPos ? props.$yPos : undefined };
   border-radius: 3px;
   background: rgba(238, 228, 218, 0.35);
   border: 1px solid red;
 `
 
-export { StyledMain, Title, GameContainer, GridContainer, GridRow, GridCell };
+const InnerText = styled.p<{$color?: number;}>`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  background-color: ${props => props.$color ? selectColor(props.$color) : undefined };
+`
+
+const selectColor = (color: number) => {
+  switch(color) {
+    case 2: return 'red';
+    case 4: return 'blue';
+  }
+
+}
+
+export { StyledMain, Title, GameContainer, GridContainer, GridRow, GridCell, InnerText };
