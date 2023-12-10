@@ -30,7 +30,7 @@ const Game = () => {
             {/* tile List map으로 돌기 */}
             {tileList.map(item => {
               return (
-                <GridCell $xPos={item.xPos} $yPos={item.yPos}>
+                <GridCell key={`tile-${item.xPos}-${item.yPos}`} $xPos={item.xPos} $yPos={item.yPos}>
                   <InnerText $color={item.value}>{item.value}</InnerText>
                 </GridCell>
               )
