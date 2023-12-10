@@ -19,14 +19,16 @@ const GameContainer = styled.div`
   padding: 15px;
   background: #bbada0;
   border-radius: 6px;
+  width: calc(100px*4 + 10px*6);
+  height: calc(100px*4 + 10px*6);
 `
 
 const GridContainer = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: 100px 100px 100px;
-  grid-template-rows: 100px 100px 100px;
-  gap: 0.5rem;
+  grid-template-columns: 100px 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px 100px;
+  gap: 10px;
 `
 
 const GridCell = styled.div<{$xPos?: number; $yPos?: number;}>`
