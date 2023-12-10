@@ -15,3 +15,11 @@ $ npm install -g yarn
 $ yarn install
 $ yarn run dev
 ```
+
+## (참고) Vscode Extentions 설치
+- vscode-styled-components `v.1.7.8`
+- Color Highlight `v.2.5.0`
+- Auto Rename Tag `v.0.1.10`
+- Auto Close Tag `v.0.5.14`
+- Highlight Matching Tag `v.0.11.0`
+- HTML to CSS autocompletion `v.1.1.2`
