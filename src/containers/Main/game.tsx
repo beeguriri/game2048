@@ -1,3 +1,4 @@
+import { getInitialTileList } from '@utils/tile';
 import { GameContainer, GridCell, GridContainer, InnerText } from './style';
 import { useState } from 'react';
 
@@ -8,9 +9,7 @@ type Item = {
 };
 
 const Game = () => {
-    const [tileList, setTileList] = useState<Item[]>([]);
-    tileList.push({xPos: 1, yPos: 1, value: 4})
-    tileList.push({xPos: 2, yPos: 3, value: 256})
+    const [tileList, setTileList] = useState<Item[]>(getInitialTileList);
 
     return (
       <>
