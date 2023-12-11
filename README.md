@@ -23,3 +23,4 @@ $ yarn run dev
 - Auto Close Tag `v.0.5.14`
 - Highlight Matching Tag `v.0.11.0`
 - HTML to CSS autocompletion `v.1.1.2`
+- ESLint `v2.4.2`
