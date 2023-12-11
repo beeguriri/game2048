@@ -24,11 +24,14 @@ type Props = {
 export default function useMoveTile({ tileList, setTileList }: Props) {
   //움직이면 항상 추가가 되어야 함
   function moveAndAdd({ x, y }: Position) {
+    console.log('tileList', tileList);
     const newTileList = moveTile({ tileList, x, y });
+    console.log('newTileList', newTileList);
+
     const newTile = makeTile(newTileList);
     newTile.isNew = true;
     newTileList.push(newTile);
-    console.log(newTileList);
+    console.log('add newTileList', newTileList);
     setTileList(newTileList);
   }
 

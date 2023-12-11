@@ -50,77 +50,61 @@ export function makeTile(tileList: Item[]) {
 }
 
 export function moveTile({ tileList, x, y }: Props) {
-  const isMoveY = y !== 0;
-  const isMinus = x + y < 0;
+  const isMoveY = y !== 0; // y 축으로의 움직임 여부
+  const isMinus = x + y < 0; // 감소 방향으로 움직이는지 여부
+
+  // 움직임 방향 및 축에 따라 타일을 정렬
   const sorted = tileList
-    .map((item) => ({ ...item, isNew: false, isMerged: false }))
+    .map((item) => ({ ...item, isMerged: false, isNew: false }))
     .filter((item) => !item.isDisabled)
     .sort((a, b) => {
-      const res = isMoveY ? a.xPos - b.xPos : a.yPos - b.yPos;
-      if (res) return res;
-      else {
-        if (isMoveY) return Math.abs(a.yPos - b.yPos);
-        else return Math.abs(a.xPos - b.xPos);
-      }
+      const res = isMoveY
+        ? a[isMinus ? 'xPos' : 'yPos'] - b[isMinus ? 'xPos' : 'yPos']
+        : a[isMinus ? 'yPos' : 'xPos'] - b[isMinus ? 'yPos' : 'xPos'];
+
+      return res || (isMinus ? a.yPos - b.yPos : b.yPos - a.yPos);
     });
-  const initialPos = isMinus ? 1 : MAX_POS;
-  let pos = initialPos;
-  for (let i = 0; i < sorted.length; i++) {
-    if (isMoveY) {
-      sorted[i].yPos = pos;
-      pos = isMinus ? pos + 1 : pos - 1;
-      if (sorted[i].xPos !== sorted[i + 1]?.xPos) {
-        pos = initialPos;
-      }
-    } else {
-      sorted[i].xPos = pos;
-      pos = isMinus ? pos + 1 : pos - 1;
-      if (sorted[i].yPos !== sorted[i + 1]?.yPos) {
-        pos = initialPos;
-      }
-    }
-  }
 
+  console.log('sorted', sorted);
+
+  let pos = isMinus ? 1 : MAX_POS; // 초기 위치 설정
   let nextPos = 0;
-  const newTileList = [...sorted];
+  const newTileList: Item[] = [];
+
+  // 움직임 방향 및 축에 따라 타일의 위치 업데이트
   for (let i = 0; i < sorted.length; i++) {
-    if (sorted[i].isDisabled) continue;
+    const currentItem = sorted[i];
 
-    if (
-      nextPos && isMoveY
-        ? sorted[i].xPos === sorted[i - 1]?.xPos
-        : sorted[i].yPos === sorted[i - 1]?.yPos
-    ) {
-      if (isMoveY) sorted[i].yPos = nextPos;
-      else sorted[i].xPos = nextPos;
-
-      nextPos += isMinus ? 1 : -1;
-    } else nextPos = 0;
-
-    if (
-      (isMoveY
-        ? sorted[i].xPos === sorted[i + 1]?.xPos
-        : sorted[i].yPos === sorted[i + 1]?.yPos) &&
-      sorted[i].value === sorted[i + 1]?.value
-    ) {
-      const tile = makeTile(sorted);
-      tile.xPos = sorted[i].xPos;
-      tile.yPos = sorted[i].yPos;
-      tile.isMerged = true;
-      tile.value = sorted[i].value * 2;
-      newTileList.push(tile);
-      sorted[i].isDisabled = true;
-      sorted[i + 1].isDisabled = true;
-
-      if (isMoveY) {
-        nextPos = sorted[i + 1].yPos;
-        sorted[i + 1].yPos = sorted[i].yPos;
-      } else {
-        nextPos = sorted[i + 1].xPos;
-        sorted[i + 1].xPos = sorted[i].xPos;
-      }
+    if (isMoveY) {
+      currentItem.yPos = pos;
+    } else {
+      currentItem.xPos = pos;
     }
+
+    pos = isMinus ? pos + 1 : pos - 1;
+
+    // 다른 열 또는 행에 속한 경우 위치 초기화
+    if (
+      currentItem[isMoveY ? 'xPos' : 'yPos'] !==
+      sorted[i + 1]?.[isMoveY ? 'xPos' : 'yPos']
+    ) {
+      pos = isMinus ? 1 : MAX_POS;
+    }
+
+    // 같은 열 또는 행에 속한 타일의 경우 위치 업데이트
+    if (
+      nextPos &&
+      currentItem[isMoveY ? 'xPos' : 'yPos'] ===
+        sorted[i - 1]?.[isMoveY ? 'xPos' : 'yPos']
+    ) {
+      currentItem[isMoveY ? 'yPos' : 'xPos'] = nextPos;
+      nextPos += isMinus ? 1 : -1;
+    } else {
+      nextPos = 0;
+    }
+
+    newTileList.push(currentItem);
   }
 
-  return newTileList.filter((item) => !item.isDisabled);
+  return newTileList;
 }

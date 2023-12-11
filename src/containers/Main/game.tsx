@@ -25,12 +25,12 @@ const Game = () => {
           {times(MAX_POS, (y) =>
             times(MAX_POS, (x) => (
               <GridCell
-                key={`cell-${x + 1}-${y + 1}`}
+                key={`cell-${y + 1}-${x + 1}`}
                 $xPos={x + 1}
                 $yPos={y + 1}
               >
                 <InnerText>
-                  ({x + 1},{y + 1})
+                  ({y + 1},{x + 1})
                 </InnerText>
               </GridCell>
             )),
@@ -40,12 +40,12 @@ const Game = () => {
           {tileList.map((item) => {
             return (
               <GridCell
-                key={`tile-${item.xPos}-${item.yPos}-${item.value}-${item.isMerged}`}
+                key={`tile-${item.yPos}-${item.xPos}-${item.value}-${item.isMerged}`}
                 $xPos={item.yPos}
                 $yPos={item.xPos}
               >
                 <InnerText $color={item.value}>
-                  ({item.xPos},{item.yPos})<br />
+                  ({item.yPos},{item.xPos})<br />
                   {item.value}
                 </InnerText>
               </GridCell>
