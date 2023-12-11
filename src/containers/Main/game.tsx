@@ -26,8 +26,8 @@ const Game = () => {
             times(MAX_POS, (x) => (
               <GridCell
                 key={`cell-${y + 1}-${x + 1}`}
-                $xPos={x + 1}
-                $yPos={y + 1}
+                $xPos={y + 1}
+                $yPos={x + 1}
               >
                 <InnerText>
                   ({y + 1},{x + 1})
