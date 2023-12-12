@@ -70,6 +70,6 @@ export const moveLeft = (board: number[][]) => {
   newBoard = combineLeft(newBoard);
   newBoard = slideLeft(newBoard);
 
-  if (isSameBoard(board, newBoard)) return board;
+  // if (isSameBoard(board, newBoard)) return board;
   return generateNewTile(newBoard);
 };
