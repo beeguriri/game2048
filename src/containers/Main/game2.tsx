@@ -1,5 +1,5 @@
 import { MAX_POS } from '@assets/constant';
-import { useToast } from '@chakra-ui/react';
+import { Box, Button, Link, Text, useToast } from '@chakra-ui/react';
 import useMoveTile2 from '@hooks/useMoveTile2';
 import { initialBoardSetting } from '@utils/tile2';
 import { useEffect, useState } from 'react';
@@ -13,16 +13,33 @@ const Game2 = () => {
   );
   const [isGameOver, setIsGameOver] = useState(false);
   const toast = useToast();
-
+  const id = 'test';
   useMoveTile2({ board, setBoard, setIsGameOver });
 
   useEffect(() => {
     if (isGameOver) {
-      toast({
-        title: 'Game Over',
-        status: 'error',
-        description: '더이상 이동할 수 있는 타일이 없습니다.',
-      });
+      console.log('실패확인');
+      if (!toast.isActive(id)) {
+        toast({
+          id,
+          status: 'error',
+          duration: null,
+          position: 'top',
+          render: () => (
+            <>
+              <Box bg="tomato" w="100%" p={4} color="white">
+                <Text fontSize="lg" fontWeight="bold" mb={2}>
+                  Game Over
+                </Text>
+                <Text mb={4}>더 이상 이동할 수 있는 타일이 없습니다.</Text>
+                <Link href="/">
+                  <Button colorScheme="red">New Game</Button>
+                </Link>
+              </Box>
+            </>
+          ),
+        });
+      }
     }
     return () => {
       setIsGameOver(false);
