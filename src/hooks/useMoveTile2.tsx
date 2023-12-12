@@ -1,6 +1,6 @@
 import { addKeyObserver, removeKeyObserver } from '@utils/keyboard';
 import {
-  isSameBoard,
+  isGameOver,
   moveDown,
   moveLeft,
   moveRight,
@@ -19,25 +19,25 @@ export default function useMoveTile2({
 }) {
   function moveKeyUp() {
     const newBoard = moveUp(board);
-    if (isSameBoard(newBoard, board)) setIsGameOver(true);
+    if (isGameOver(newBoard)) setIsGameOver(true);
     setBoard(newBoard);
   }
 
   function moveKeyDown() {
     const newBoard = moveDown(board);
-    if (isSameBoard(newBoard, board)) setIsGameOver(true);
+    if (isGameOver(newBoard)) setIsGameOver(true);
     setBoard(newBoard);
   }
 
   function moveKeyLeft() {
     const newBoard = moveLeft(board);
-    if (isSameBoard(newBoard, board)) setIsGameOver(true);
+    if (isGameOver(newBoard)) setIsGameOver(true);
     setBoard(newBoard);
   }
 
   function moveKeyRight() {
     const newBoard = moveRight(board);
-    if (isSameBoard(newBoard, board)) setIsGameOver(true);
+    if (isGameOver(newBoard)) setIsGameOver(true);
     setBoard(newBoard);
   }
 

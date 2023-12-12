@@ -1,4 +1,5 @@
 import { MAX_POS } from '@assets/constant';
+import { useToast } from '@chakra-ui/react';
 import useMoveTile2 from '@hooks/useMoveTile2';
 import { initialBoardSetting } from '@utils/tile2';
 import { useEffect, useState } from 'react';
@@ -11,15 +12,22 @@ const Game2 = () => {
     ),
   );
   const [isGameOver, setIsGameOver] = useState(false);
+  const toast = useToast();
 
   useMoveTile2({ board, setBoard, setIsGameOver });
 
   useEffect(() => {
-    if (isGameOver) alert('game over');
+    if (isGameOver) {
+      toast({
+        title: 'Game Over',
+        status: 'error',
+        description: '더이상 이동할 수 있는 타일이 없습니다.',
+      });
+    }
     return () => {
       setIsGameOver(false);
     };
-  }, [isGameOver]);
+  }, [isGameOver, toast]);
 
   return (
     <>

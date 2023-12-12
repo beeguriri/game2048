@@ -86,7 +86,7 @@ export const moveLeft = (board: number[][]) => {
   newBoard = combineLRTile(newBoard);
   newBoard = slideLeft(newBoard);
 
-  // if (isSameBoard(board, newBoard)) return board;
+  if (isSameBoard(board, newBoard)) return board;
   return generateNewTile(newBoard);
 };
 
@@ -106,7 +106,7 @@ export const moveRight = (board: number[][]) => {
   newBoard = combineLRTile(newBoard);
   newBoard = slideRight(newBoard);
 
-  // if (isSameBoard(board, newBoard)) return board;
+  if (isSameBoard(board, newBoard)) return board;
   return generateNewTile(newBoard);
 };
 
@@ -137,6 +137,7 @@ export const moveUp = (board: number[][]) => {
   newBoard = combineUDTile(newBoard);
   newBoard = slideUp(newBoard);
 
+  if (isSameBoard(board, newBoard)) return board;
   return generateNewTile(newBoard);
 };
 
@@ -167,5 +168,16 @@ export const moveDown = (board: number[][]) => {
   newBoard = combineUDTile(newBoard);
   newBoard = slideDown(newBoard);
 
+  if (isSameBoard(board, newBoard)) return board;
   return generateNewTile(newBoard);
+};
+
+/* 게임 종료 확인 */
+export const isGameOver = (board: number[][]) => {
+  return (
+    moveLeft(board) === board &&
+    moveRight(board) === board &&
+    moveUp(board) === board &&
+    moveDown(board) === board
+  );
 };
