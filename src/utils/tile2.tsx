@@ -44,13 +44,26 @@ export const initialBoardSetting = (board: number[][]): number[][] => {
 };
 
 /* 숫자 합치기 */
-const combineTile = (board: number[][]) => {
+const combineLRTile = (board: number[][]) => {
   const newBoard = Array.from(board);
   for (let row = 0; row < MAX_POS; row++) {
     for (let col = 0; col < MAX_POS - 1; col++) {
       if (newBoard[row][col] === newBoard[row][col + 1]) {
         newBoard[row][col] = newBoard[row][col] + newBoard[row][col + 1];
         newBoard[row][col + 1] = 0;
+      }
+    }
+  }
+  return newBoard;
+};
+
+const combineUDTile = (board: number[][]) => {
+  const newBoard = Array.from(board);
+  for (let col = 0; col < MAX_POS; col++) {
+    for (let row = 0; row < MAX_POS - 1; row++) {
+      if (newBoard[row][col] === newBoard[row + 1][col]) {
+        newBoard[row][col] = newBoard[row][col] + newBoard[row + 1][col];
+        newBoard[row + 1][col] = 0;
       }
     }
   }
@@ -70,7 +83,7 @@ const slideLeft = (board: number[][]) => {
 /* 왼쪽 버튼 눌렀을 때 */
 export const moveLeft = (board: number[][]) => {
   let newBoard = slideLeft(board);
-  newBoard = combineTile(newBoard);
+  newBoard = combineLRTile(newBoard);
   newBoard = slideLeft(newBoard);
 
   // if (isSameBoard(board, newBoard)) return board;
@@ -90,9 +103,69 @@ const slideRight = (board: number[][]) => {
 /* 오른쪽 버튼 눌렀을 때 */
 export const moveRight = (board: number[][]) => {
   let newBoard = slideRight(board);
-  newBoard = combineTile(newBoard);
+  newBoard = combineLRTile(newBoard);
   newBoard = slideRight(newBoard);
 
   // if (isSameBoard(board, newBoard)) return board;
+  return generateNewTile(newBoard);
+};
+
+/* 위쪽으로 옮기기 */
+const slideUp = (board: number[][]) => {
+  const newBoard: number[][] = Array.from(new Array(MAX_POS), () =>
+    new Array(MAX_POS).fill(0),
+  );
+  for (let col = 0; col < MAX_POS; col++) {
+    const temp: number[] = [];
+
+    for (let row = 0; row < MAX_POS; row++) {
+      if (board[row][col] !== 0) temp.push(board[row][col]);
+    }
+    const zero_cnt = MAX_POS - temp.length;
+    const newRow = temp.concat(Array(zero_cnt).fill(0));
+
+    for (let row = 0; row < MAX_POS; row++) {
+      newBoard[row][col] = newRow[row];
+    }
+  }
+  return newBoard;
+};
+
+/* 위쪽 버튼 눌렀을 때 */
+export const moveUp = (board: number[][]) => {
+  let newBoard = slideUp(board);
+  newBoard = combineUDTile(newBoard);
+  newBoard = slideUp(newBoard);
+
+  return generateNewTile(newBoard);
+};
+
+/* 아래쪽으로 옮기기 */
+const slideDown = (board: number[][]) => {
+  const newBoard: number[][] = Array.from(new Array(MAX_POS), () =>
+    new Array(MAX_POS).fill(0),
+  );
+  for (let col = 0; col < MAX_POS; col++) {
+    const temp: number[] = [];
+
+    for (let row = 0; row < MAX_POS; row++) {
+      if (board[row][col] !== 0) temp.push(board[row][col]);
+    }
+    const zero_cnt = MAX_POS - temp.length;
+    const newRow = Array(zero_cnt).fill(0).concat(temp);
+
+    for (let row = 0; row < MAX_POS; row++) {
+      newBoard[row][col] = newRow[row];
+    }
+  }
+  return newBoard;
+};
+
+/* 아래쪽 버튼 눌렀을 때 */
+export const moveDown = (board: number[][]) => {
+  let newBoard = slideDown(board);
+  newBoard = combineUDTile(newBoard);
+  newBoard = slideDown(newBoard);
+
   return generateNewTile(newBoard);
 };

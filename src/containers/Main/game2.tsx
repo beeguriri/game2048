@@ -11,7 +11,6 @@ const Game2 = () => {
     ),
   );
   useMoveTile2({ board, setBoard });
-  console.log(board);
 
   return (
     <>
