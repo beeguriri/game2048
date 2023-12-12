@@ -1,9 +1,9 @@
 import { MAX_POS } from '@assets/constant';
+import useMoveTile2 from '@hooks/useMoveTile2';
 import { generateNewTile } from '@utils/tile2';
 import { times } from 'lodash';
 import { useEffect, useState } from 'react';
 import { GameContainer, GridCell, GridContainer, InnerText } from './style';
-import useMoveTile2 from '@hooks/useMoveTile2';
 
 const Game2 = () => {
   const initialBoard = [
