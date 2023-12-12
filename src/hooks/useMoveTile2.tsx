@@ -1,5 +1,5 @@
 import { addKeyObserver, removeKeyObserver } from '@utils/keyboard';
-import { moveLeft } from '@utils/tile2';
+import { isSameBoard, moveLeft, moveRight } from '@utils/tile2';
 import { useEffect } from 'react';
 
 export default function useMoveTile2({
@@ -7,14 +7,8 @@ export default function useMoveTile2({
   setBoard,
 }: {
   board: number[][];
-  setBoard: any;
+  setBoard: (board: number[][]) => void;
 }) {
-  //움직이면 항상 추가가 되어야 함
-  // function moveAndAdd({ x, y }: { x: number; y: number }) {
-  //   console.log('board', board);
-  //   setBoard(moveLeft(board));
-  // }
-
   function moveUp() {
     // moveAndAdd({ x: 0, y: -1 });
   }
@@ -24,27 +18,30 @@ export default function useMoveTile2({
   }
 
   function moveKeyLeft() {
-    // moveAndAdd({ x: -1, y: -0 });
     console.log('input key: left');
     const newBoard = moveLeft(board);
+    if (isSameBoard(newBoard, board)) alert('game over');
     setBoard(newBoard);
   }
 
-  function moveRight() {
-    // moveAndAdd({ x: 1, y: 0 });
+  function moveKeyRight() {
+    console.log('input key: right');
+    const newBoard = moveRight(board);
+    if (isSameBoard(newBoard, board)) alert('game over');
+    setBoard(newBoard);
   }
 
   useEffect(() => {
     addKeyObserver('up', moveUp);
     addKeyObserver('down', moveDown);
     addKeyObserver('left', moveKeyLeft);
-    addKeyObserver('right', moveRight);
+    addKeyObserver('right', moveKeyRight);
 
     return () => {
       removeKeyObserver('up', moveUp);
       removeKeyObserver('down', moveDown);
       removeKeyObserver('left', moveKeyLeft);
-      removeKeyObserver('right', moveRight);
+      removeKeyObserver('right', moveKeyRight);
     };
   });
 }
