@@ -1,7 +1,11 @@
 # About
 - React + TypeScript + Vite 를 사용하여
 - [https://play2048.co/](https://play2048.co/) 를 참고 한
-- `2048 게임` 개발
+- `2048 게임` 만들기
+
+### 🎁 References
+- https://programming119.tistory.com/183
+- https://github.com/landvibe/inflearn-react-project/tree/master/game2048/final
 
 ## 실행
 ```bash
