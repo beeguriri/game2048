@@ -1,18 +1,23 @@
-import hotkeys from "hotkeys-js";
+import hotkeys from 'hotkeys-js';
 
-const observerMap: any = {}
+type KeyCallback = () => void;
+type ObserverMap = Record<string, KeyCallback[]>;
+
+const observerMap: ObserverMap = {};
 // up, down, left, right
 
-export function addKeyObserver(key: string, callback: any) {
-  if(!observerMap[key]) {
+export function addKeyObserver(key: string, callback: () => void) {
+  if (!observerMap[key]) {
     observerMap[key] = [];
     hotkeys(key, () => executeCallbacks(key));
   }
   observerMap[key].push(callback);
 }
 
-export function removeKeyObserver(key: string, callback: any) {
-  observerMap[key] = observerMap[key].filter((item: any) => item !== callback);
+export function removeKeyObserver(key: string, callback: () => void) {
+  observerMap[key] = observerMap[key].filter(
+    (item: () => void) => item !== callback,
+  );
 }
 
 function executeCallbacks(key: string) {
