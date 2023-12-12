@@ -6,7 +6,7 @@ import {
   moveRight,
   moveUp,
 } from '@utils/tile2';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 export default function useMoveTile2({
   board,
@@ -17,29 +17,29 @@ export default function useMoveTile2({
   setBoard: (board: number[][]) => void;
   setIsGameOver: (isGameOver: boolean) => void;
 }) {
-  function moveKeyUp() {
+  const moveKeyUp = useCallback(() => {
     const newBoard = moveUp(board);
     if (isGameOver(newBoard)) setIsGameOver(true);
     setBoard(newBoard);
-  }
+  }, [board, setBoard, setIsGameOver]);
 
-  function moveKeyDown() {
+  const moveKeyDown = useCallback(() => {
     const newBoard = moveDown(board);
     if (isGameOver(newBoard)) setIsGameOver(true);
     setBoard(newBoard);
-  }
+  }, [board, setBoard, setIsGameOver]);
 
-  function moveKeyLeft() {
+  const moveKeyLeft = useCallback(() => {
     const newBoard = moveLeft(board);
     if (isGameOver(newBoard)) setIsGameOver(true);
     setBoard(newBoard);
-  }
+  }, [board, setBoard, setIsGameOver]);
 
-  function moveKeyRight() {
+  const moveKeyRight = useCallback(() => {
     const newBoard = moveRight(board);
     if (isGameOver(newBoard)) setIsGameOver(true);
     setBoard(newBoard);
-  }
+  }, [board, setBoard, setIsGameOver]);
 
   useEffect(() => {
     addKeyObserver('up', moveKeyUp);
@@ -53,5 +53,5 @@ export default function useMoveTile2({
       removeKeyObserver('left', moveKeyLeft);
       removeKeyObserver('right', moveKeyRight);
     };
-  });
+  }, [moveKeyDown, moveKeyLeft, moveKeyRight, moveKeyUp]);
 }
