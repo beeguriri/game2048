@@ -1,7 +1,7 @@
 import { MAX_POS } from '@assets/constant';
 import useMoveTile2 from '@hooks/useMoveTile2';
 import { initialBoardSetting } from '@utils/tile2';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GameContainer, GridCell, GridContainer, InnerText } from './style';
 
 const Game2 = () => {
@@ -10,7 +10,16 @@ const Game2 = () => {
       Array.from(new Array(MAX_POS), () => new Array(MAX_POS).fill(0)),
     ),
   );
-  useMoveTile2({ board, setBoard });
+  const [isGameOver, setIsGameOver] = useState(false);
+
+  useMoveTile2({ board, setBoard, setIsGameOver });
+
+  useEffect(() => {
+    if (isGameOver) alert('game over');
+    return () => {
+      setIsGameOver(false);
+    };
+  }, [isGameOver]);
 
   return (
     <>
