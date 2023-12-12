@@ -1,18 +1,29 @@
 import styled from '@emotion/styled';
 
-const StyledMain = styled.main`
-  width: 100%;
+const StyledMain = styled.div`
+  width: calc(100px * 4 + 10px * 6 + 4vw);
   height: calc(100% - 100px - 35px); //header, footer 영역 제외
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
   background-color: #faf5ff;
+  justify-content: top;
+  align-items: center;
 `;
 
-const Title = styled.p`
-  font-weight: bold;
+const TextWrapper = styled.div`
+  width: 100%;
+  padding: 0 15px;
+`;
+
+const Title = styled.span`
   font-size: 1rem;
+`;
+
+const StrongTitle = styled.span`
+  font-size: 1rem;
+  font-weight: bold;
 `;
 
 const GameContainer = styled.div`
@@ -52,6 +63,24 @@ const InnerText = styled.p<{ $color?: number }>`
     props.$color ? selectColor(props.$color) : undefined};
 `;
 
+const ScoreWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100px;
+  padding: 5px 15px;
+  gap: 2rem;
+`;
+
+const ScoreBox = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  background: #bbada0;
+  border-radius: 6px;
+`;
+
+// eslint-disable-next-line consistent-return
 const selectColor = (color: number) => {
   switch (color) {
     case 2:
@@ -79,4 +108,15 @@ const selectColor = (color: number) => {
   }
 };
 
-export { StyledMain, Title, GameContainer, GridContainer, GridCell, InnerText };
+export {
+  StyledMain,
+  TextWrapper,
+  Title,
+  StrongTitle,
+  GameContainer,
+  GridContainer,
+  GridCell,
+  InnerText,
+  ScoreWrapper,
+  ScoreBox,
+};
