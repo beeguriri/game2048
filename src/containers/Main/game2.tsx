@@ -18,7 +18,6 @@ const Game2 = () => {
 
   useEffect(() => {
     if (isGameOver) {
-      console.log('실패확인');
       if (!toast.isActive(id)) {
         toast({
           id,
@@ -60,7 +59,6 @@ const Game2 = () => {
                   $yPos={colIndex + 1}
                 >
                   <InnerText $color={value}>
-                    ({rowIndex + 1},{colIndex + 1})<br />
                     {value !== 0 ? value : undefined}
                   </InnerText>
                 </GridCell>

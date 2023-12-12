@@ -57,6 +57,7 @@ const InnerText = styled.p<{ $color?: number }>`
   width: 100%;
   height: 100%;
   font-weight: bold;
+  font-size: 2.2rem;
   justify-content: center;
   align-items: center;
   background-color: ${(props) =>
