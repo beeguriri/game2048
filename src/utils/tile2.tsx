@@ -34,6 +34,12 @@ export const generateNewTile = (board: number[][]): number[][] => {
   } else return generateNewTile(board);
 };
 
+export const initialBoardSetting = (board: number[][]): number[][] => {
+  let newBoard = generateNewTile(board);
+  newBoard = generateNewTile(newBoard);
+  return newBoard;
+};
+
 /* 왼쪽으로 옮기기 */
 const slideLeft = (board: number[][]) => {
   return board.map((row) => {
