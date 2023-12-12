@@ -1,7 +1,5 @@
-import { MAX_POS } from '@assets/constant';
 import useMoveTile2 from '@hooks/useMoveTile2';
 import { initialBoardSetting } from '@utils/tile2';
-import { times } from 'lodash';
 import { useState } from 'react';
 import { GameContainer, GridCell, GridContainer, InnerText } from './style';
 
