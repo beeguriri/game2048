@@ -85,7 +85,7 @@ const combineUDTile = (
     }
   }
   score += newScore;
-  setScore(score);
+  // setScore(score);
   console.log('UD:: score: ', score);
   return newBoard;
 };
@@ -220,4 +220,10 @@ export const isGameOver = (
     moveUp(board, score, setScore) === board &&
     moveDown(board, score, setScore) === board
   );
+};
+
+/* 점수 비교하는 함수 */
+export const calcScore = (prevBoard: number[][], newBoard: number[][]) => {
+  const score = 0;
+  return score;
 };

@@ -1,5 +1,12 @@
 import { addKeyObserver, removeKeyObserver } from '@utils/keyboard';
-import { isGameOver, moveDown, moveLeft, moveRight, moveUp } from '@utils/tile';
+import {
+  calcScore,
+  isGameOver,
+  moveDown,
+  moveLeft,
+  moveRight,
+  moveUp,
+} from '@utils/tile';
 import { useCallback, useEffect } from 'react';
 
 export default function useMoveTile({
@@ -19,6 +26,9 @@ export default function useMoveTile({
     const newBoard = moveUp(board, score, setScore);
     if (isGameOver(newBoard, score, setScore)) setIsGameOver(true);
     setBoard(newBoard);
+    //TODO
+    const newScore = calcScore(board, newBoard);
+    setScore(score + newScore);
   }, [board, setBoard, setIsGameOver, score, setScore]);
 
   const moveKeyDown = useCallback(() => {
