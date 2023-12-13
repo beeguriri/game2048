@@ -259,11 +259,28 @@ export const moveDown = (
 // };
 
 /* 게임 종료 확인 */
+const isPossibleMerge = (board: number[][]) => {
+  for (let row = 0; row < MAX_POS; row++) {
+    for (let col = 0; col < MAX_POS - 1; col++) {
+      if (board[row][col] !== 0 && board[row][col] === board[row][col + 1])
+        return true;
+    }
+  }
+  for (let col = 0; col < MAX_POS; col++) {
+    for (let row = 0; row < MAX_POS - 1; row++) {
+      if (board[row][col] !== 0 && board[row][col] === board[row + 1][col])
+        return true;
+    }
+  }
+  return false;
+};
+
 export const isGameOver = (board: number[][]) => {
   return (
     isSameBoard(board, slideLeft(board)) &&
     isSameBoard(board, slideRight(board)) &&
     isSameBoard(board, slideUp(board)) &&
-    isSameBoard(board, slideDown(board))
+    isSameBoard(board, slideDown(board)) &&
+    !isPossibleMerge(board)
   );
 };
