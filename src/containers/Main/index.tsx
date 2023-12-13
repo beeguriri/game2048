@@ -1,6 +1,6 @@
 import AboveGame from './aboveGame';
 // import Game from './game';
-import Game2 from './game2';
+import Game from './game';
 import MainHeader from './mainHeader';
 import { StyledMain } from './style';
 
@@ -9,7 +9,7 @@ const MainContents = () => {
     <StyledMain>
       <MainHeader />
       <AboveGame />
-      <Game2 />
+      <Game />
     </StyledMain>
   );
 };

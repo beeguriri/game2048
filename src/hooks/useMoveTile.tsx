@@ -1,67 +1,57 @@
 import { addKeyObserver, removeKeyObserver } from '@utils/keyboard';
-import { makeTile, moveTile } from '@utils/tile';
-import { useEffect } from 'react';
+import {
+  isGameOver,
+  moveDown,
+  moveLeft,
+  moveRight,
+  moveUp,
+} from '@utils/tile2';
+import { useCallback, useEffect } from 'react';
 
-type Position = {
-  x: number;
-  y: number;
-};
+export default function useMoveTile({
+  board,
+  setBoard,
+  setIsGameOver,
+}: {
+  board: number[][];
+  setBoard: (board: number[][]) => void;
+  setIsGameOver: (isGameOver: boolean) => void;
+}) {
+  const moveKeyUp = useCallback(() => {
+    const newBoard = moveUp(board);
+    if (isGameOver(newBoard)) setIsGameOver(true);
+    setBoard(newBoard);
+  }, [board, setBoard, setIsGameOver]);
 
-type Item = {
-  xPos: number;
-  yPos: number;
-  value: number;
-  isNew: boolean;
-  isMerged: boolean;
-  isDisabled: boolean;
-};
+  const moveKeyDown = useCallback(() => {
+    const newBoard = moveDown(board);
+    if (isGameOver(newBoard)) setIsGameOver(true);
+    setBoard(newBoard);
+  }, [board, setBoard, setIsGameOver]);
 
-type Props = {
-  tileList: Item[];
-  setTileList: any;
-};
+  const moveKeyLeft = useCallback(() => {
+    const newBoard = moveLeft(board);
+    if (isGameOver(newBoard)) setIsGameOver(true);
+    setBoard(newBoard);
+  }, [board, setBoard, setIsGameOver]);
 
-export default function useMoveTile({ tileList, setTileList }: Props) {
-  //움직이면 항상 추가가 되어야 함
-  function moveAndAdd({ x, y }: Position) {
-    console.log('tileList', tileList);
-    const newTileList = moveTile({ tileList, x, y });
-    console.log('newTileList', newTileList);
-
-    const newTile = makeTile(newTileList);
-    newTile.isNew = true;
-    newTileList.push(newTile);
-    console.log('add newTileList', newTileList);
-    setTileList(newTileList);
-  }
-
-  function moveUp() {
-    moveAndAdd({ x: 0, y: -1 });
-  }
-
-  function moveDown() {
-    moveAndAdd({ x: 0, y: 1 });
-  }
-
-  function moveLeft() {
-    moveAndAdd({ x: -1, y: -0 });
-  }
-
-  function moveRight() {
-    moveAndAdd({ x: 1, y: 0 });
-  }
+  const moveKeyRight = useCallback(() => {
+    const newBoard = moveRight(board);
+    if (isGameOver(newBoard)) setIsGameOver(true);
+    setBoard(newBoard);
+  }, [board, setBoard, setIsGameOver]);
 
   useEffect(() => {
-    addKeyObserver('up', moveUp);
-    addKeyObserver('down', moveDown);
-    addKeyObserver('left', moveLeft);
-    addKeyObserver('right', moveRight);
+    addKeyObserver('up', moveKeyUp);
+    addKeyObserver('down', moveKeyDown);
+    addKeyObserver('left', moveKeyLeft);
+    addKeyObserver('right', moveKeyRight);
 
     return () => {
-      removeKeyObserver('up', moveUp);
-      removeKeyObserver('down', moveDown);
-      removeKeyObserver('left', moveLeft);
-      removeKeyObserver('right', moveRight);
+      removeKeyObserver('up', moveKeyUp);
+      removeKeyObserver('down', moveKeyDown);
+      removeKeyObserver('left', moveKeyLeft);
+      removeKeyObserver('right', moveKeyRight);
     };
-  });
+  }, [moveKeyDown, moveKeyLeft, moveKeyRight, moveKeyUp]);
 }
