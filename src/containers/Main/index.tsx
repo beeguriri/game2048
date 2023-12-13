@@ -6,7 +6,7 @@ import MainHeader from './mainHeader';
 import { StyledMain } from './style';
 
 const MainContents = () => {
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState<number>(0);
   return (
     <StyledMain>
       <MainHeader score={score} />

@@ -50,18 +50,20 @@ const combineLRTile = (
   setScore: (score: number) => void,
 ) => {
   const newBoard = Array.from(board);
-  // let newScore = 0;
+  let newScore = 0;
   for (let row = 0; row < MAX_POS; row++) {
     for (let col = 0; col < MAX_POS - 1; col++) {
       if (newBoard[row][col] === newBoard[row][col + 1]) {
         newBoard[row][col] = newBoard[row][col] + newBoard[row][col + 1];
         newBoard[row][col + 1] = 0;
-        // newScore += newBoard[row][col];
+        newScore += newBoard[row][col];
+        console.log('LR:: newScore: ', newScore);
       }
     }
   }
-  // score += newScore;
+  score += newScore;
   // setScore(score);
+  console.log('LR:: score: ', score);
   return newBoard;
 };
 
@@ -78,11 +80,13 @@ const combineUDTile = (
         newBoard[row][col] = newBoard[row][col] + newBoard[row + 1][col];
         newBoard[row + 1][col] = 0;
         newScore += newBoard[row][col];
+        console.log('UD:: newScore: ', newScore);
       }
     }
   }
   score += newScore;
   setScore(score);
+  console.log('UD:: score: ', score);
   return newBoard;
 };
 
