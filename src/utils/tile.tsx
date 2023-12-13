@@ -50,18 +50,18 @@ const combineLRTile = (
   setScore: (score: number) => void,
 ) => {
   const newBoard = Array.from(board);
-  let newScore = 0;
+  // let newScore = 0;
   for (let row = 0; row < MAX_POS; row++) {
     for (let col = 0; col < MAX_POS - 1; col++) {
       if (newBoard[row][col] === newBoard[row][col + 1]) {
         newBoard[row][col] = newBoard[row][col] + newBoard[row][col + 1];
         newBoard[row][col + 1] = 0;
-        newScore += newBoard[row][col];
+        // newScore += newBoard[row][col];
       }
     }
   }
-  score += newScore;
-  setScore(score);
+  // score += newScore;
+  // setScore(score);
   return newBoard;
 };
 
