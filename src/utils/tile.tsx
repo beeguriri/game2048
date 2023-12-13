@@ -25,7 +25,7 @@ const isPossibleNewTile = (board: number[][]): boolean => {
 };
 
 /* 새로운 타일 생성 */
-export const generateNewTile = (board: number[][]): number[][] => {
+const generateNewTile = (board: number[][]): number[][] => {
   if (!isPossibleNewTile(board)) return board;
 
   const row = getRandomInteger(1, MAX_POS) - 1;
