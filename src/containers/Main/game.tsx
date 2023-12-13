@@ -1,7 +1,7 @@
 import { MAX_POS } from '@assets/constant';
 import { Box, Button, Link, Text, useToast } from '@chakra-ui/react';
 import useMoveTile from '@hooks/useMoveTile';
-import { initialBoardSetting } from '@utils/tile2';
+import { initialBoardSetting } from '@utils/tile';
 import { useEffect, useState } from 'react';
 import { GameContainer, GridCell, GridContainer, InnerText } from './style';
 
