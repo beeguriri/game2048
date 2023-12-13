@@ -2,10 +2,7 @@ import { MAX_POS } from '@assets/constant';
 import { getRandomInteger } from './number';
 
 /* 같은 보드인지 확인 */
-export const isSameBoard = (
-  board1: number[][],
-  board2: number[][],
-): boolean => {
+const isSameBoard = (board1: number[][], board2: number[][]): boolean => {
   return board1.every((row, r) => {
     return row.every((n, c) => {
       return board2[r][c] === n;
@@ -60,35 +57,29 @@ const combineLRTile = (
       }
     }
   }
-  console.log('newScore:: ', newScore);
-  score += newScore;
-  console.log('score:: ', score);
-  setScore(score);
+  setScore(score + newScore);
   return newBoard;
 };
 
-// const combineUDTile = (
-//   board: number[][],
-//   score: number,
-//   setScore: (score: number) => void,
-// ) => {
-//   const newBoard = Array.from(board);
-//   let newScore = 0;
-//   for (let col = 0; col < MAX_POS; col++) {
-//     for (let row = 0; row < MAX_POS - 1; row++) {
-//       if (newBoard[row][col] === newBoard[row + 1][col]) {
-//         newBoard[row][col] = newBoard[row][col] + newBoard[row + 1][col];
-//         newBoard[row + 1][col] = 0;
-//         newScore += newBoard[row][col];
-//         console.log('UD:: newScore: ', newScore);
-//       }
-//     }
-//   }
-//   score += newScore;
-//   // setScore(score);
-//   console.log('UD:: score: ', score);
-//   return newBoard;
-// };
+const combineUDTile = (
+  board: number[][],
+  score: number,
+  setScore: (score: number) => void,
+) => {
+  const newBoard = Array.from(board);
+  let newScore = 0;
+  for (let col = 0; col < MAX_POS; col++) {
+    for (let row = 0; row < MAX_POS - 1; row++) {
+      if (newBoard[row][col] === newBoard[row + 1][col]) {
+        newBoard[row][col] = newBoard[row][col] + newBoard[row + 1][col];
+        newBoard[row + 1][col] = 0;
+        newScore += newBoard[row][col];
+      }
+    }
+  }
+  setScore(score + newScore);
+  return newBoard;
+};
 
 /* 왼쪽으로 옮기기 */
 const slideLeft = (board: number[][]) => {
@@ -140,35 +131,32 @@ export const moveRight = (
 
 /* 시계방향 회전 */
 //제일 윗 행 -> 제일 오른쪽 열
-const rotateCW = (board: number[][]) => {
-  const newBoard: number[][] = Array.from(new Array(MAX_POS), () =>
-    new Array(MAX_POS).fill(0),
-  );
+// const rotateCW = (board: number[][]) => {
+//   const newBoard: number[][] = Array.from(new Array(MAX_POS), () =>
+//     new Array(MAX_POS).fill(0),
+//   );
 
-  for (let row = 0; row < MAX_POS; row++) {
-    for (let col = 0; col < MAX_POS; col++) {
-      newBoard[col][MAX_POS - row - 1] = board[row][col];
-    }
-  }
-  console.log('board:: ', board);
-  console.log('CW:: ', newBoard);
-  return newBoard;
-};
+//   for (let row = 0; row < MAX_POS; row++) {
+//     for (let col = 0; col < MAX_POS; col++) {
+//       newBoard[col][MAX_POS - row - 1] = board[row][col];
+//     }
+//   }
+//   return newBoard;
+// };
 
 /* 반시계방향 회전 */
 //제일 윗 행 -> 제일 왼쪽 열
-const rotateCCW = (board: number[][]) => {
-  const newBoard: number[][] = Array.from(new Array(MAX_POS), () =>
-    new Array(MAX_POS).fill(0),
-  );
-  for (let row = 0; row < MAX_POS; row++) {
-    for (let col = 0; col < MAX_POS; col++) {
-      newBoard[MAX_POS - col - 1][row] = board[row][col];
-    }
-  }
-  console.log('CCW:: ', newBoard);
-  return newBoard;
-};
+// const rotateCCW = (board: number[][]) => {
+//   const newBoard: number[][] = Array.from(new Array(MAX_POS), () =>
+//     new Array(MAX_POS).fill(0),
+//   );
+//   for (let row = 0; row < MAX_POS; row++) {
+//     for (let col = 0; col < MAX_POS; col++) {
+//       newBoard[MAX_POS - col - 1][row] = board[row][col];
+//     }
+//   }
+//   return newBoard;
+// };
 
 /* 위쪽으로 옮기기 */
 const slideUp = (board: number[][]) => {
@@ -192,33 +180,33 @@ const slideUp = (board: number[][]) => {
 };
 
 /* 위쪽 버튼 눌렀을 때 */
-// export const moveUp = (
-//   board: number[][],
-//   score: number,
-//   setScore: (score: number) => void,
-// ) => {
-//   let newBoard = slideUp(board);
-//   newBoard = combineUDTile(newBoard, score, setScore);
-//   newBoard = slideUp(newBoard);
-
-//   if (isSameBoard(board, newBoard)) return board;
-//   return generateNewTile(newBoard);
-// };
-
 export const moveUp = (
   board: number[][],
   score: number,
   setScore: (score: number) => void,
 ) => {
-  let newBoard = rotateCW(board);
-  newBoard = slideRight(newBoard);
-  newBoard = combineLRTile(newBoard, score, setScore);
-  newBoard = slideRight(newBoard);
-  newBoard = rotateCCW(newBoard);
+  let newBoard = slideUp(board);
+  newBoard = combineUDTile(newBoard, score, setScore);
+  newBoard = slideUp(newBoard);
 
   if (isSameBoard(board, newBoard)) return board;
   return generateNewTile(newBoard);
 };
+
+// export const moveUp = (
+//   board: number[][],
+//   score: number,
+//   setScore: (score: number) => void,
+// ) => {
+//   let newBoard = rotateCW(board);
+//   newBoard = slideRight(newBoard);
+//   newBoard = combineLRTile(newBoard, score, setScore);
+//   newBoard = slideRight(newBoard);
+//   newBoard = rotateCCW(newBoard);
+
+//   if (isSameBoard(board, newBoard)) return board;
+//   return generateNewTile(newBoard);
+// };
 
 /* 아래쪽으로 옮기기 */
 const slideDown = (board: number[][]) => {
@@ -242,46 +230,40 @@ const slideDown = (board: number[][]) => {
 };
 
 /* 아래쪽 버튼 눌렀을 때 */
-// export const moveDown = (
-//   board: number[][],
-//   score: number,
-//   setScore: (score: number) => void,
-// ) => {
-//   let newBoard = slideDown(board);
-//   newBoard = combineUDTile(newBoard, score, setScore);
-//   newBoard = slideDown(newBoard);
-
-//   if (isSameBoard(board, newBoard)) return board;
-//   return generateNewTile(newBoard);
-// };
-
 export const moveDown = (
   board: number[][],
   score: number,
   setScore: (score: number) => void,
 ) => {
-  let newBoard = rotateCW(board);
-  newBoard = slideLeft(newBoard);
-  newBoard = combineLRTile(newBoard, score, setScore);
-  newBoard = slideLeft(newBoard);
-  newBoard = rotateCCW(newBoard);
+  let newBoard = slideDown(board);
+  newBoard = combineUDTile(newBoard, score, setScore);
+  newBoard = slideDown(newBoard);
 
   if (isSameBoard(board, newBoard)) return board;
   return generateNewTile(newBoard);
 };
 
+// export const moveDown = (
+//   board: number[][],
+//   score: number,
+//   setScore: (score: number) => void,
+// ) => {
+//   let newBoard = rotateCW(board);
+//   newBoard = slideLeft(newBoard);
+//   newBoard = combineLRTile(newBoard, score, setScore);
+//   newBoard = slideLeft(newBoard);
+//   newBoard = rotateCCW(newBoard);
+
+//   if (isSameBoard(board, newBoard)) return board;
+//   return generateNewTile(newBoard);
+// };
+
 /* 게임 종료 확인 */
 export const isGameOver = (board: number[][]) => {
   return (
-    slideLeft(board) === board &&
-    slideRight(board) === board &&
-    slideUp(board) === board &&
-    slideDown(board) === board
+    isSameBoard(board, slideLeft(board)) &&
+    isSameBoard(board, slideRight(board)) &&
+    isSameBoard(board, slideUp(board)) &&
+    isSameBoard(board, slideDown(board))
   );
 };
-
-/* 점수 비교하는 함수 */
-// export const calcScore = (prevBoard: number[][], newBoard: number[][]) => {
-//   const score = 0;
-//   return score;
-// };
