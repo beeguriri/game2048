@@ -1,12 +1,5 @@
 import { addKeyObserver, removeKeyObserver } from '@utils/keyboard';
-import {
-  calcScore,
-  isGameOver,
-  moveDown,
-  moveLeft,
-  moveRight,
-  moveUp,
-} from '@utils/tile';
+import { isGameOver, moveDown, moveLeft, moveRight, moveUp } from '@utils/tile';
 import { useCallback, useEffect } from 'react';
 
 export default function useMoveTile({
@@ -24,28 +17,25 @@ export default function useMoveTile({
 }) {
   const moveKeyUp = useCallback(() => {
     const newBoard = moveUp(board, score, setScore);
-    if (isGameOver(newBoard, score, setScore)) setIsGameOver(true);
+    if (isGameOver(newBoard)) setIsGameOver(true);
     setBoard(newBoard);
-    //TODO
-    const newScore = calcScore(board, newBoard);
-    setScore(score + newScore);
   }, [board, setBoard, setIsGameOver, score, setScore]);
 
   const moveKeyDown = useCallback(() => {
     const newBoard = moveDown(board, score, setScore);
-    if (isGameOver(newBoard, score, setScore)) setIsGameOver(true);
+    if (isGameOver(newBoard)) setIsGameOver(true);
     setBoard(newBoard);
   }, [board, setBoard, setIsGameOver, score, setScore]);
 
   const moveKeyLeft = useCallback(() => {
     const newBoard = moveLeft(board, score, setScore);
-    if (isGameOver(newBoard, score, setScore)) setIsGameOver(true);
+    if (isGameOver(newBoard)) setIsGameOver(true);
     setBoard(newBoard);
   }, [board, setBoard, setIsGameOver, score, setScore]);
 
   const moveKeyRight = useCallback(() => {
     const newBoard = moveRight(board, score, setScore);
-    if (isGameOver(newBoard, score, setScore)) setIsGameOver(true);
+    if (isGameOver(newBoard)) setIsGameOver(true);
     setBoard(newBoard);
   }, [board, setBoard, setIsGameOver, score, setScore]);
 
