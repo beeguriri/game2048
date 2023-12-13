@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import AboveGame from './aboveGame';
 // import Game from './game';
 import Game from './game';
@@ -5,11 +6,12 @@ import MainHeader from './mainHeader';
 import { StyledMain } from './style';
 
 const MainContents = () => {
+  const [score, setScore] = useState(0);
   return (
     <StyledMain>
-      <MainHeader />
+      <MainHeader score={score} />
       <AboveGame />
-      <Game />
+      <Game score={score} setScore={setScore} />
     </StyledMain>
   );
 };

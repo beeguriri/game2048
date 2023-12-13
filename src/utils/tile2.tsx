@@ -44,29 +44,45 @@ export const initialBoardSetting = (board: number[][]): number[][] => {
 };
 
 /* 숫자 합치기 */
-const combineLRTile = (board: number[][]) => {
+const combineLRTile = (
+  board: number[][],
+  score: number,
+  setScore: (score: number) => void,
+) => {
   const newBoard = Array.from(board);
+  let newScore = 0;
   for (let row = 0; row < MAX_POS; row++) {
     for (let col = 0; col < MAX_POS - 1; col++) {
       if (newBoard[row][col] === newBoard[row][col + 1]) {
         newBoard[row][col] = newBoard[row][col] + newBoard[row][col + 1];
         newBoard[row][col + 1] = 0;
+        newScore += newBoard[row][col];
       }
     }
   }
+  score += newScore;
+  setScore(score);
   return newBoard;
 };
 
-const combineUDTile = (board: number[][]) => {
+const combineUDTile = (
+  board: number[][],
+  score: number,
+  setScore: (score: number) => void,
+) => {
   const newBoard = Array.from(board);
+  let newScore = 0;
   for (let col = 0; col < MAX_POS; col++) {
     for (let row = 0; row < MAX_POS - 1; row++) {
       if (newBoard[row][col] === newBoard[row + 1][col]) {
         newBoard[row][col] = newBoard[row][col] + newBoard[row + 1][col];
         newBoard[row + 1][col] = 0;
+        newScore += newBoard[row][col];
       }
     }
   }
+  score += newScore;
+  setScore(score);
   return newBoard;
 };
 
@@ -81,9 +97,13 @@ const slideLeft = (board: number[][]) => {
 };
 
 /* 왼쪽 버튼 눌렀을 때 */
-export const moveLeft = (board: number[][]) => {
+export const moveLeft = (
+  board: number[][],
+  score: number,
+  setScore: (score: number) => void,
+) => {
   let newBoard = slideLeft(board);
-  newBoard = combineLRTile(newBoard);
+  newBoard = combineLRTile(newBoard, score, setScore);
   newBoard = slideLeft(newBoard);
 
   if (isSameBoard(board, newBoard)) return board;
@@ -101,9 +121,13 @@ const slideRight = (board: number[][]) => {
 };
 
 /* 오른쪽 버튼 눌렀을 때 */
-export const moveRight = (board: number[][]) => {
+export const moveRight = (
+  board: number[][],
+  score: number,
+  setScore: (score: number) => void,
+) => {
   let newBoard = slideRight(board);
-  newBoard = combineLRTile(newBoard);
+  newBoard = combineLRTile(newBoard, score, setScore);
   newBoard = slideRight(newBoard);
 
   if (isSameBoard(board, newBoard)) return board;
@@ -132,9 +156,13 @@ const slideUp = (board: number[][]) => {
 };
 
 /* 위쪽 버튼 눌렀을 때 */
-export const moveUp = (board: number[][]) => {
+export const moveUp = (
+  board: number[][],
+  score: number,
+  setScore: (score: number) => void,
+) => {
   let newBoard = slideUp(board);
-  newBoard = combineUDTile(newBoard);
+  newBoard = combineUDTile(newBoard, score, setScore);
   newBoard = slideUp(newBoard);
 
   if (isSameBoard(board, newBoard)) return board;
@@ -163,9 +191,13 @@ const slideDown = (board: number[][]) => {
 };
 
 /* 아래쪽 버튼 눌렀을 때 */
-export const moveDown = (board: number[][]) => {
+export const moveDown = (
+  board: number[][],
+  score: number,
+  setScore: (score: number) => void,
+) => {
   let newBoard = slideDown(board);
-  newBoard = combineUDTile(newBoard);
+  newBoard = combineUDTile(newBoard, score, setScore);
   newBoard = slideDown(newBoard);
 
   if (isSameBoard(board, newBoard)) return board;
@@ -173,11 +205,15 @@ export const moveDown = (board: number[][]) => {
 };
 
 /* 게임 종료 확인 */
-export const isGameOver = (board: number[][]) => {
+export const isGameOver = (
+  board: number[][],
+  score: number,
+  setScore: (score: number) => void,
+) => {
   return (
-    moveLeft(board) === board &&
-    moveRight(board) === board &&
-    moveUp(board) === board &&
-    moveDown(board) === board
+    moveLeft(board, score, setScore) === board &&
+    moveRight(board, score, setScore) === board &&
+    moveUp(board, score, setScore) === board &&
+    moveDown(board, score, setScore) === board
   );
 };

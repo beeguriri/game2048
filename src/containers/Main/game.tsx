@@ -5,7 +5,13 @@ import { initialBoardSetting } from '@utils/tile2';
 import { useEffect, useState } from 'react';
 import { GameContainer, GridCell, GridContainer, InnerText } from './style';
 
-const Game = () => {
+const Game = ({
+  score,
+  setScore,
+}: {
+  score: number;
+  setScore: (score: number) => void;
+}) => {
   const [board, setBoard] = useState<number[][]>(
     initialBoardSetting(
       Array.from(new Array(MAX_POS), () => new Array(MAX_POS).fill(0)),
@@ -14,7 +20,7 @@ const Game = () => {
   const [isGameOver, setIsGameOver] = useState(false);
   const toast = useToast();
   const id = 'test';
-  useMoveTile({ board, setBoard, setIsGameOver });
+  useMoveTile({ board, setBoard, setIsGameOver, score, setScore });
 
   useEffect(() => {
     if (isGameOver) {

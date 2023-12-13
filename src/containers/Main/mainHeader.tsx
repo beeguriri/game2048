@@ -1,10 +1,10 @@
 import { ScoreBox, ScoreWrapper } from './style';
 
-const MainHeader = () => {
+const MainHeader = ({ score }: { score: number }) => {
   return (
     <>
       <ScoreWrapper>
-        <ScoreBox>364</ScoreBox>
+        <ScoreBox>{score}</ScoreBox>
         <ScoreBox>400</ScoreBox>
       </ScoreWrapper>
     </>
