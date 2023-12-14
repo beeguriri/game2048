@@ -81,6 +81,22 @@ const ScoreBox = styled.div`
   border-radius: 6px;
 `;
 
+const ScoreBoxInner = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 15px;
+`;
+
+const ScoreBoxInnerText = styled.p`
+  font-weight: bold;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 // eslint-disable-next-line consistent-return
 const selectColor = (color: number) => {
   switch (color) {
@@ -120,4 +136,6 @@ export {
   InnerText,
   ScoreWrapper,
   ScoreBox,
+  ScoreBoxInner,
+  ScoreBoxInnerText,
 };
