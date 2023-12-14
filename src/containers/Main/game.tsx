@@ -1,5 +1,6 @@
 import { MAX_POS } from '@assets/constant';
-import { Box, Button, Link, Text, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
+import ToastBox from '@components/Box';
 import useMoveTile from '@hooks/useMoveTile';
 import { initialBoardSetting } from '@utils/tile';
 import { useEffect, useState } from 'react';
@@ -27,20 +28,11 @@ const Game = ({
       if (!toast.isActive(id)) {
         toast({
           id,
-          status: 'error',
           duration: null,
           position: 'top',
           render: () => (
             <>
-              <Box bg="tomato" w="100%" p={4} color="white">
-                <Text fontSize="lg" fontWeight="bold" mb={2}>
-                  Game Over
-                </Text>
-                <Text mb={4}>더 이상 이동할 수 있는 타일이 없습니다.</Text>
-                <Link href="/">
-                  <Button colorScheme="red">New Game</Button>
-                </Link>
-              </Box>
+              <ToastBox />
             </>
           ),
         });
