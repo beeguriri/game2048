@@ -1,4 +1,10 @@
-import { ScoreBox, ScoreBoxInner, ScoreBoxInnerText, ScoreWrapper, Title } from './style';
+import {
+  ScoreBox,
+  ScoreBoxInner,
+  ScoreBoxInnerText,
+  ScoreWrapper,
+  Title,
+} from './style';
 
 const MainHeader = ({
   score,
