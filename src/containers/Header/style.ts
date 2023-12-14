@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 
 const Header = styled.header`
-  background-color: #e9d8fd;
+  background: #805ad5;
+  opacity: 0.7;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -16,6 +17,7 @@ const Header = styled.header`
 const Title = styled.p`
   font-weight: bold;
   font-size: 2rem;
+  color: white;
 `;
 
 export { Header, Title };

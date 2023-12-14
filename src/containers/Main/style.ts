@@ -28,10 +28,11 @@ const StrongTitle = styled.span`
 
 const GameContainer = styled.div`
   padding: 15px;
-  background: #bbada0;
+  background: #805ad5;
   border-radius: 6px;
   width: calc(100px * 4 + 10px * 6);
   height: calc(100px * 4 + 10px * 6);
+  opacity: 0.7;
 `;
 
 const GridContainer = styled.div`
@@ -47,9 +48,8 @@ const GridCell = styled.div<{ $xPos?: number; $yPos?: number }>`
   height: 100px;
   grid-row-start: ${(props) => (props.$xPos ? props.$xPos : undefined)};
   grid-column-start: ${(props) => (props.$yPos ? props.$yPos : undefined)};
-  border-radius: 3px;
-  background: rgba(238, 228, 218, 0.35);
-  border: 1px solid red;
+  background: #faf5ff;
+  border-radius: 6px;
 `;
 
 const InnerText = styled.p<{ $color?: number }>`
@@ -60,6 +60,7 @@ const InnerText = styled.p<{ $color?: number }>`
   font-size: 2.2rem;
   justify-content: center;
   align-items: center;
+  border-radius: 6px;
   background-color: ${(props) =>
     props.$color ? selectColor(props.$color) : undefined};
 `;
@@ -77,8 +78,10 @@ const ScoreBox = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 6px;
-  background: #bbada0;
+  background: #805ad5;
   border-radius: 6px;
+  box-shadow: inset;
+  opacity: 0.7;
 `;
 
 const ScoreBoxInner = styled.div`
@@ -87,6 +90,7 @@ const ScoreBoxInner = styled.div`
   display: flex;
   flex-direction: column;
   padding: 5px 15px;
+  color: white;
 `;
 
 const ScoreBoxInnerText = styled.p`
@@ -95,33 +99,34 @@ const ScoreBoxInnerText = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
 `;
 
 // eslint-disable-next-line consistent-return
 const selectColor = (color: number) => {
   switch (color) {
     case 2:
-      return '#FAF5FF';
+      return '#D8E2DC';
     case 4:
-      return '#FAF5FF';
+      return '#D8E2DC';
     case 8:
-      return '#E9D8FD';
+      return '#FFE5D9';
     case 16:
-      return '#D6BCFA';
+      return '#FFE5D9';
     case 32:
-      return '#B794F4';
+      return '#FFCAD4';
     case 64:
-      return '#9F7AEA';
+      return '#FFCAD4';
     case 128:
-      return '#805AD5';
+      return '#F4ACB7';
     case 256:
-      return '#6B46C1';
+      return '#F4ACB7';
     case 512:
-      return '#553C9A';
+      return '#9D8189';
     case 1024:
-      return '#44337A';
+      return '#9D8189';
     case 2048:
-      return '#322659';
+      return '#ff686b';
   }
 };
 
