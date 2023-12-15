@@ -56,7 +56,10 @@ const Game = ({
                   $xPos={rowIndex + 1}
                   $yPos={colIndex + 1}
                 >
-                  <InnerText $color={value}>
+                  <InnerText
+                    $color={value}
+                    $size={Number(value?.toString().length)}
+                  >
                     {value !== 0 ? value : undefined}
                   </InnerText>
                 </GridCell>

@@ -33,6 +33,7 @@ const GameContainer = styled.div`
   width: calc(100px * 4 + 10px * 6);
   height: calc(100px * 4 + 10px * 6);
   opacity: 0.7;
+  box-shadow: 5px 5px 5px gray;
 `;
 
 const GridContainer = styled.div`
@@ -50,14 +51,16 @@ const GridCell = styled.div<{ $xPos?: number; $yPos?: number }>`
   grid-column-start: ${(props) => (props.$yPos ? props.$yPos : undefined)};
   background: #faf5ff;
   border-radius: 6px;
+  box-shadow: 3px 3px 3px lightgray;
 `;
 
-const InnerText = styled.p<{ $color?: number }>`
+const InnerText = styled.p<{ $color?: number; $size?: number }>`
   display: flex;
   width: 100%;
   height: 100%;
   font-weight: bold;
-  font-size: 2.2rem;
+  font-size: ${(props) => (props.$size === 4 ? 2.5 : 3)}rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   justify-content: center;
   align-items: center;
   border-radius: 6px;
@@ -82,6 +85,7 @@ const ScoreBox = styled.div`
   border-radius: 6px;
   box-shadow: inset;
   opacity: 0.7;
+  box-shadow: 5px 5px 5px gray;
 `;
 
 const ScoreBoxInner = styled.div`
