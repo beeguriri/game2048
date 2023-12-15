@@ -1,6 +1,7 @@
 import { MAX_POS } from '@assets/constant';
 import { useToast } from '@chakra-ui/react';
 import ToastBox from '@components/Box';
+import useConfetti from '@hooks/useConfetti';
 import useMoveTile from '@hooks/useMoveTile';
 import { initialBoardSetting } from '@utils/tile';
 import { useEffect, useState } from 'react';
@@ -13,15 +14,23 @@ const Game = ({
   score: number;
   setScore: (score: number) => void;
 }) => {
-  const [board, setBoard] = useState<number[][]>(
-    initialBoardSetting(
-      Array.from(new Array(MAX_POS), () => new Array(MAX_POS).fill(0)),
-    ),
-  );
+  // const [board, setBoard] = useState<number[][]>(
+  //   initialBoardSetting(
+  //     Array.from(new Array(MAX_POS), () => new Array(MAX_POS).fill(0)),
+  //   ),
+  // );
+  //테스트용
+  const [board, setBoard] = useState<number[][]>([
+    [2, 4, 4, 0],
+    [64, 128, 2, 2],
+    [1024, 1024, 0, 0],
+    [0, 0, 256, 2],
+  ]);
   const [isGameOver, setIsGameOver] = useState(false);
   const toast = useToast();
-  const id = 'test';
+  const id = 'game';
   useMoveTile({ board, setBoard, setIsGameOver, score, setScore });
+  useConfetti({ board });
 
   useEffect(() => {
     if (isGameOver) {
