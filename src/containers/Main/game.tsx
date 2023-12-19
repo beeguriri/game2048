@@ -14,18 +14,20 @@ const Game = ({
   score: number;
   setScore: (score: number) => void;
 }) => {
-  // const [board, setBoard] = useState<number[][]>(
-  //   initialBoardSetting(
-  //     Array.from(new Array(MAX_POS), () => new Array(MAX_POS).fill(0)),
-  //   ),
-  // );
-  //테스트용
+  const [board, setBoard] = useState<number[][]>(
+    initialBoardSetting(
+      Array.from(new Array(MAX_POS), () => new Array(MAX_POS).fill(0)),
+    ),
+  );
+
+  /*테스트용
   const [board, setBoard] = useState<number[][]>([
     [2, 4, 4, 0],
     [64, 128, 2, 2],
     [1024, 1024, 0, 0],
     [0, 0, 256, 2],
-  ]);
+  ]);*/
+
   const [isGameOver, setIsGameOver] = useState(false);
   const toast = useToast();
   const id = 'game';
