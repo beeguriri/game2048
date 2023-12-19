@@ -5,13 +5,13 @@
 
   ::selection {
     color: #fefefe;
-    background-color: rgba(0, 167, 226, 0.7);
+    background-color: var(--chakra-colors-purple-300);
   }
 }
 
 html,
 body {
-  padding: 0 5vw;
+  padding: 0;
   margin: 0;
   width: 100%;
   height: 100%;
