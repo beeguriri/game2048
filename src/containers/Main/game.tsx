@@ -1,7 +1,7 @@
 import { MAX_POS } from '@assets/constant';
 import { useToast } from '@chakra-ui/react';
 import ToastBox from '@components/Box';
-import useConfetti from '@hooks/useConfetti';
+import useJsConfetti from '@hooks/useJsConfetti';
 import useMoveTile from '@hooks/useMoveTile';
 import { initialBoardSetting } from '@utils/tile';
 import { useEffect, useState } from 'react';
@@ -29,8 +29,9 @@ const Game = ({
   const [isGameOver, setIsGameOver] = useState(false);
   const toast = useToast();
   const id = 'game';
+
   useMoveTile({ board, setBoard, setIsGameOver, score, setScore });
-  useConfetti({ board });
+  useJsConfetti({ board });
 
   useEffect(() => {
     if (isGameOver) {
