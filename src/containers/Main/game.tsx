@@ -42,7 +42,11 @@ const Game = ({
           position: 'top',
           render: () => (
             <>
-              <ToastBox />
+              <ToastBox
+                head={'Game Over'}
+                text={'더 이상 이동할 수 있는 타일이 없습니다.'}
+                button={'✨ New Game ✨'}
+              />
             </>
           ),
         });

@@ -52,7 +52,11 @@ export default function useJsConfetti({ board }: { board: number[][] }) {
           position: 'top',
           render: () => (
             <>
-              <ToastBox />
+              <ToastBox
+                head={'Game Success'}
+                text={'2048 타일을 만드는데 성공 했습니다!'}
+                button={'✨ New Game ✨'}
+              />
             </>
           ),
         });
