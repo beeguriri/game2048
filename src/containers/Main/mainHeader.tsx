@@ -1,10 +1,6 @@
-import {
-  ScoreBox,
-  ScoreBoxInner,
-  ScoreBoxInnerText,
-  ScoreWrapper,
-  Title,
-} from './style';
+import Counter from '@components/Counter';
+import { ScoreBox, ScoreBoxInner, ScoreWrapper, Title } from './style';
+
 
 const MainHeader = ({
   score,
@@ -19,18 +15,13 @@ const MainHeader = ({
         <ScoreBox>
           <ScoreBoxInner>
             <Title>score</Title>
-            <ScoreBoxInnerText>
-              {score.toLocaleString('ko-kr')}
-            </ScoreBoxInnerText>
+            <Counter number={score} duration={500}></Counter>
           </ScoreBoxInner>
         </ScoreBox>
         <ScoreBox>
           <ScoreBoxInner>
             <Title>Best Score</Title>
-            <ScoreBoxInnerText>
-              {/* 최고기록이 6자리 숫자 안넘는 듯 */}
-              {bestScore.toLocaleString('ko-kr')}
-            </ScoreBoxInnerText>
+            <Counter number={bestScore} duration={500}></Counter>
           </ScoreBoxInner>
         </ScoreBox>
       </ScoreWrapper>
