@@ -1,5 +1,5 @@
 # About
-- `ver1.0` 
+- `ver1.0` [https://game2048-991cc.web.app/](https://game2048-991cc.web.app/)
 - React + TypeScript + Vite 를 사용하여
 - [https://play2048.co/](https://play2048.co/) 를 참고 한
 - `2048 게임` 만들기
@@ -21,6 +21,10 @@ $ npm install -g yarn
 # 해당 패키지에서 실행
 $ yarn install
 $ yarn run dev
+
+# build
+$ yarn build
+$ firebase deploy
 ```
 
 ## (참고) Vscode Extentions 설치
