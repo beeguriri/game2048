@@ -32,6 +32,6 @@ $ yarn run dev
 - ESLint `v2.4.2`
 
 ## 구현 결과
-![](/public/images/playing.gif)
+![](/public/images/playing_counter.gif)
 ![](/public/images/success.gif)
 ![](/public/images/gameover.png)
