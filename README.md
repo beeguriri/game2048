@@ -1,8 +1,10 @@
+# [`🎈Game Start🎈`](https://game2048-991cc.web.app/)
+
 # About
-- `ver1.0` [https://game2048-991cc.web.app/](https://game2048-991cc.web.app/)
 - React + TypeScript + Vite 를 사용하여
 - [https://play2048.co/](https://play2048.co/) 를 참고 한
 - `2048 게임` 만들기
+- `ver1.0`
 
 ### 🎁 References
 - https://programming119.tistory.com/183
