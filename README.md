@@ -9,6 +9,7 @@
 - https://github.com/landvibe/inflearn-react-project/tree/master/game2048/final
 - https://velog.io/@tinubee/React-%EC%83%89%EC%A2%85%EC%9D%B4-%EC%A1%B0%EA%B0%81-%EB%82%A0%EB%A6%BC-%ED%9A%A8%EA%B3%BC-feat.-Canvas-Confetti
 
+
 ## 실행
 ```bash
 # node ver. 18.18.1

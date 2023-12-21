@@ -1,6 +1,7 @@
 import Counter from '@components/Counter';
 import { ScoreBox, ScoreBoxInner, ScoreWrapper, Title } from './style';
 
+
 const MainHeader = ({
   score,
   bestScore,
